@@ -13,7 +13,7 @@ Run `python scripts/check_env.py` after each step. The goal is all PASS.
 | What | Where |
 |---|---|
 | Python venv | `F:\ustaad\venv` |
-| Repo | `F:\ustaad\ustaad` |
+| Repo | `F:\ustaad` |
 | Glimmer GGUFs | `F:\models\glimmer\` |
 | Hugging Face cache (SAM weights) | `F:\hf-cache` (`HF_HOME`) |
 | Footage | `F:\ustaad\data\` |
@@ -49,11 +49,16 @@ Run `python scripts/check_env.py` after each step. The goal is all PASS.
    cd F:\ustaad ; git clone https://github.com/aprettymess/ustaad.git ; cd ustaad
    pip install -r requirements.txt
    copy configs\local.example.yaml configs\local.yaml    # edit -ngl and paths
-   pytest -q
+   pytest
    python scripts\check_env.py --sam-video --glimmer
    ```
 8. Hub: `powershell -File scripts\run_hub.ps1` → http://localhost:7860 → **Phone link** for the QR code.
    Windows Firewall: allow python.exe and llama-server.exe on **Private** networks only.
+
+## GPU layers (`-ngl`) on 12 GB
+Measured: Q4_K_M runs well at `-ngl 28`. IQ3_XXS at 38 froze the PC, so start it at 30 and go up by 2.
+To make a too-high value fail fast instead of freezing Windows, open NVIDIA Control Panel → Manage 3D settings →
+Program Settings → `llama-server.exe` → **CUDA – Sysmem Fallback Policy = Prefer No Sysmem Fallback**.
 
 ## Fitting Glimmer + SAM in 12 GB
 `glimmer.manage_server: true` (default in `local.example.yaml`): USTAAD stops llama-server before SAM stages and

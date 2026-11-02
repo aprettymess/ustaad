@@ -1,6 +1,8 @@
 # Start Muse Glimmer on Windows by hand (llama.cpp CUDA build).
 # Only needed if configs/local.yaml has glimmer.manage_server: false (otherwise USTAAD starts/stops it itself).
-# RTX 5070 12 GB starting points: Q4_K_M -> -ngl 28 ; UD-IQ3_XXS -> -ngl 38. Tune while watching: nvidia-smi -l 1
+# RTX 5070 12 GB: Q4_K_M -> -ngl 28 (measured OK). UD-IQ3_XXS -> start 30, +2 steps (38 froze the PC).
+# If raising -ngl FREEZES Windows: NVIDIA Control Panel > Manage 3D settings > Program Settings > llama-server.exe >
+#   'CUDA - Sysmem Fallback Policy' = 'Prefer No Sysmem Fallback'  (then it errors with OOM instead of freezing)
 param(
   [string]$Model  = "F:\models\glimmer\Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf",
   [string]$MMProj = "F:\models\glimmer\mmproj-Muse-Glimmer-30B-Q4_K_M.gguf",
