@@ -1,0 +1,43 @@
+:root { --bg:#0f1115; --panel:#171a21; --line:#262b36; --text:#e8eaf0; --muted:#8b93a7; --accent:#f2b134; --ok:#3ccf8e; --bad:#ff5d6c; --tool:#7aa7ff; }
+* { box-sizing:border-box; }
+body { margin:0; font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); }
+header { display:flex; justify-content:space-between; align-items:center; padding:14px 20px; border-bottom:1px solid var(--line); gap:12px; flex-wrap:wrap; }
+.logo { font-weight:800; letter-spacing:.12em; color:var(--accent); font-size:20px; margin-right:12px; }
+.tag { color:var(--muted); }
+.pill { padding:3px 10px; border-radius:99px; border:1px solid var(--line); font-size:12px; }
+.offline { color:var(--ok); border-color:#1f5e44; }
+nav { display:flex; gap:4px; padding:8px 20px; border-bottom:1px solid var(--line); overflow-x:auto; }
+nav button, button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:8px 14px; cursor:pointer; font:inherit; }
+nav button.active { border-color:var(--accent); color:var(--accent); }
+button[type=submit], button.primary { background:var(--accent); color:#111; border:none; font-weight:600; }
+button.ghost { background:transparent; }
+main { max-width:1100px; margin:0 auto; padding:20px; }
+.view { display:none; } .view.active { display:block; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin:12px 0; }
+form.card label { display:block; margin-bottom:12px; color:var(--muted); }
+form.card input[type=text], form.card select { width:100%; margin-top:4px; padding:10px; background:#0d0f13; color:var(--text); border:1px solid var(--line); border-radius:8px; }
+.muted { color:var(--muted); }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.badge { font-size:12px; padding:2px 8px; border-radius:99px; background:#222838; color:var(--muted); }
+.badge.ok { background:#123a2a; color:var(--ok); } .badge.bad { background:#3a1219; color:var(--bad); } .badge.warn { background:#3a2e12; color:var(--accent); }
+video { width:100%; border-radius:10px; background:#000; }
+.seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.seg button { border:none; border-radius:0; } .seg button.on { background:var(--accent); color:#111; }
+.step { display:grid; grid-template-columns:42px 1fr; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+.step .num { width:34px; height:34px; border-radius:50%; background:#222838; display:grid; place-items:center; font-weight:700; }
+.thumbs { display:flex; gap:8px; margin-top:8px; } .thumbs img { width:48%; border-radius:8px; border:1px solid var(--line); }
+.tip { color:var(--accent); font-size:13px; }
+.mm { border-left:4px solid var(--bad); } .mm img { width:100%; border-radius:8px; margin-top:8px; }
+.ur { direction:rtl; font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif; font-size:17px; color:#cfd3dd; }
+.trace { font:12px/1.4 ui-monospace,Consolas,monospace; max-height:520px; overflow:auto; }
+.trace div { padding:4px 6px; border-bottom:1px solid #1d212b; white-space:pre-wrap; word-break:break-word; }
+.k-llm { color:#c8a6ff; } .k-tool { color:var(--tool); } .k-sam { color:var(--ok); } .k-fix { color:var(--bad); } .k-info { color:var(--muted); }
+.banner { padding:14px 16px; border-radius:10px; font-weight:700; font-size:18px; }
+.banner.ok { background:#123a2a; color:var(--ok); } .banner.bad { background:#3a1219; color:var(--bad); }
+.obj { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--line); }
+.modal { position:fixed; inset:0; background:#000a; display:grid; place-items:center; } .modal.hidden { display:none; }
+.modal-body { background:var(--panel); padding:20px; border-radius:12px; max-width:420px; text-align:center; position:relative; }
+.modal-body svg { width:260px; height:260px; background:#fff; padding:8px; border-radius:8px; }
+.close { position:absolute; top:8px; right:8px; }
+h3 { margin:18px 0 6px; }

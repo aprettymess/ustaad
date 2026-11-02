@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USTAAD — learn from people you trust, privately</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">USTAAD</span><span class="tag">Learn hands-on jobs from the people you trust. Privately.</span></div>
+  <div class="hdr-right"><span class="pill offline">● offline · on-device</span><button id="btn-lan" class="ghost">Phone link</button></div>
+</header>
+
+<nav>
+  <button data-view="teach" class="active">Teach</button>
+  <button data-view="learn">Learn</button>
+  <button data-view="library">Library</button>
+  <button data-view="jobs">Jobs <span id="jobs-badge"></span></button>
+</nav>
+
+<main>
+  <section id="view-teach" class="view active">
+    <h2>Record a job once</h2>
+    <p class="muted">Film the whole job with the phone held steady. Pause your hands for a second after each step. Faces, plates, house numbers, documents and screens are hidden automatically.</p>
+    <form id="form-teach" class="card">
+      <label>Video <input type="file" name="file" accept="video/*" capture="environment" required></label>
+      <label>What must stay private? <input type="text" name="policy" placeholder="e.g. hide all faces, our house number and the car plate"></label>
+      <button type="submit">Make procedure</button>
+    </form>
+  </section>
+
+  <section id="view-learn" class="view">
+    <h2>Try it yourself</h2>
+    <p class="muted">Pick a procedure, film your attempt the same way, and USTAAD will show you exactly where it differs. Your attempt stays private.</p>
+    <form id="form-learn" class="card">
+      <label>Procedure <select name="procedure" id="sel-proc" required></select></label>
+      <label>Your attempt <input type="file" name="file" accept="video/*" capture="environment" required></label>
+      <button type="submit">Check my attempt</button>
+    </form>
+  </section>
+
+  <section id="view-library" class="view"><h2>Library</h2><div id="lib"></div></section>
+  <section id="view-jobs" class="view"><h2>Jobs</h2><div id="jobs"></div></section>
+  <section id="view-run" class="view"><div id="run"></div></section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modal-body"><button class="close" onclick="closeModal()">×</button><div id="modal-content"></div></div></div>
+<script src="app.js"></script>
+</body>
+</html>

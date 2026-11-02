@@ -1,0 +1,32 @@
+# Copy to configs/local.yaml (gitignored) and edit. Windows-native example (RTX 5070, 12 GB).
+glimmer:
+  base_url: http://127.0.0.1:8080/v1
+  reasoning_strength: medium
+  # USTAAD stops llama-server while SAM runs and restarts it after (they never share the 12 GB).
+  # If you prefer to start llama-server by hand (scripts/serve_glimmer.ps1), set manage_server: false.
+  manage_server: true
+  server_cmd:                      # list form = no quoting problems on Windows
+    - llama-server
+    - -m
+    - F:/models/glimmer/Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf
+    - --mmproj
+    - F:/models/glimmer/mmproj-Muse-Glimmer-30B-Q4_K_M.gguf
+    - --no-mmproj-offload
+    - -a
+    - muse-glimmer
+    - -ngl
+    - "28"                         # your tuned value from setup step W9
+    - -c
+    - "32768"
+    - -np
+    - "1"
+    - -fa
+    - "on"
+    - --jinja
+    - --host
+    - 0.0.0.0
+    - --port
+    - "8080"
+
+sampling:
+  fps: 3

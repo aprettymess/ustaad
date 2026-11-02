@@ -1,0 +1,64 @@
+# USTAAD default configuration. Copy to configs/local.yaml and override what you need.
+# Every key can also be overridden with env vars: USTAAD__GLIMMER__BASE_URL=http://...
+
+runs_dir: runs
+
+glimmer:
+  backend: openai            # openai | mock
+  base_url: http://127.0.0.1:8080/v1   # llama.cpp server (Windows host from WSL: http://$(hostname).local:8080/v1 or host IP)
+  api_key: local
+  model: muse-glimmer
+  reasoning_strength: medium # low | medium | high | xhigh (llama.cpp chat_template_kwargs)
+  temperature: 0.0           # structured extraction -> deterministic
+  max_tokens: 6144           # reasoning counts against this; too low => empty answers
+  image_max_side: 768        # downscale frames before sending (tokens scale with resolution)
+  timeout_s: 900
+  # VRAM juggling on 12 GB: let USTAAD stop llama-server while SAM runs, then restart it.
+  manage_server: false
+  server_cmd: ""             # e.g. "llama-server -m F:/models/glimmer/Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf --mmproj F:/models/glimmer/mmproj-Muse-Glimmer-30B-Q4_K_M.gguf --no-mmproj-offload -a muse-glimmer -ngl 28 -c 32768 -np 1 -fa on --jinja --port 8080"
+  server_ready_timeout_s: 240
+
+sam:
+  backend: sam31             # sam31 | mock
+  max_num_objects: 16
+  use_fa3: false             # MUST be false on RTX 50-series (FlashAttention-3 targets Hopper GPUs)
+  compile: false
+  prob_thresh: 0.4           # lower than SAM default 0.5 -> over-detect privacy objects
+  offload_video_to_cpu: true
+
+sampling:
+  fps: 3                     # frames per second sent to SAM / used for states
+  max_side: 960              # resize frames before SAM
+
+stillness:
+  motion_thresh: 4.0         # mean abs grayscale diff (0-255) below which a frame counts as still
+  min_still_frames: 2        # consecutive still sampled frames to form a checkpoint
+  hand_area_max: 0.004       # if hand masks exist: fraction of frame area allowed during a still moment
+
+states:
+  move_thresh: 0.06          # normalized centroid shift that counts as "moved"
+  attach_iou: 0.15           # box IoU increase that counts as "attached"
+
+privacy:
+  # Always-on concepts (over-blur by default). Glimmer can add more from the user's policy.
+  default_concepts: [face, licence plate, house number, document, phone screen, computer screen, name badge, photograph]
+  dilate_px: 18
+  temporal_union: true       # union masks of neighbouring sampled frames -> covers motion between samples
+  style: pixelate            # pixelate | blur | fill
+  pixel_block: 18
+
+leak_audit:
+  frames: 24                 # how many redacted frames the auditor inspects
+  max_rounds: 2              # detect -> fix -> re-check rounds
+  fix_window_s: 0.7          # box fixes are applied +/- this many seconds
+
+procedure:
+  min_diff_score: 0.5        # ignore state changes weaker than this
+  verifier_max_steps: 12     # tool-calling budget for the verifier agent
+
+attempt:
+  match_thresh: 0.45         # min similarity for a learner change to count as a master step
+  judge_mismatches: true     # ask Glimmer to confirm each mismatch with paired frames
+
+hazards:
+  refuse: [mains electricity, live wiring, gas line, gas cylinder regulator, medical procedure, injection, firearm]

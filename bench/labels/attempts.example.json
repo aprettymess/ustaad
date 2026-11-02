@@ -1,0 +1,9 @@
+{
+  "procedure": "master-REPLACE-WITH-RUN-ID",
+  "attempts": [
+    {"video": "bench/videos/bike_att1_order.mp4",   "expected": ["order"]},
+    {"video": "bench/videos/bike_att2_skip.mp4",    "expected": ["skipped"]},
+    {"video": "bench/videos/bike_att3_wrong.mp4",   "expected": ["wrong_part"]},
+    {"video": "bench/videos/bike_att4_clean.mp4",   "expected": []}
+  ]
+}

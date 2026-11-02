@@ -1,0 +1,13 @@
+runs/
+synthetic/
+bench/videos/
+configs/local.yaml
+*.gguf
+*.pt
+*.safetensors
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.env
+*.raw.mp4

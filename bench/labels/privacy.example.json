@@ -1,0 +1,10 @@
+{
+  "runs": [
+    {"run": "master-REPLACE-WITH-RUN-ID",
+     "items": [
+       {"concept": "face", "t0": 0.0, "t1": 8.0},
+       {"concept": "licence plate", "t0": 0.0, "t1": 95.0},
+       {"concept": "house number", "t0": 12.0, "t1": 20.0}
+     ]}
+  ]
+}
